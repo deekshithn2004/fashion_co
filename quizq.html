@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Fashion Style</title>
+    <style>
+        :root {
+            --primary: #6b5ce7;
+            --primary-foreground: #ffffff;
+            --muted-foreground: #6c757d;
+            --border: #e2e8f0;
+            --background: #f8fafc;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+        }
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .card-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0 0 20px;
+        }
+        .progress {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .question {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .button-primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+        .button-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .question-indicator {
+            text-align: center;
+            margin-top: 16px;
+            color: var(--muted-foreground);
+            font-size: 14px;
+        }
+        .result {
+            text-align: center;
+        }
+        .result-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        .result-description {
+            color: var(--muted-foreground);
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Find Your Fashion Style</h1>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div id="quizContent"></div>
+            <div id="result" style="display: none;">
+                <h2 class="result-title">Your Style: <span id="styleResult"></span></h2>
+                <p class="result-description">
+                    Based on your answers, your dominant style preference matches your personality and preferences.
+                </p>
+                <button class="button button-primary" onclick="retakeQuiz()">Take Quiz Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                text: "What type of occasions do you primarily dress for?",
+                options: [
+                    { value: "business", label: "Office/Business" },
+                    { value: "casual", label: "Casual outings" },
+                    { value: "sporty", label: "Exercise or sports" },
+                    { value: "social", label: "Social events" },
+                    { value: "comfort", label: "Everyday comfort" }
+                ]
+            },
+            {
+                id: 2,
+                text: "Which of these best describes your style?",
+                options: [
+                    { value: "minimalist", label: "Modern and minimalist" },
+                    { value: "classic", label: "Classic and formal" },
+                    { value: "sporty", label: "Sporty and functional" },
+                    { value: "casual", label: "Relaxed and casual" },
+                    { value: "trendy", label: "Trendy and experimental" },
+                    { value: "vintage", label: "Vintage-inspired" }
+                ]
+            },
+            {
+                id: 3,
+                text: "What's your ideal clothing fit?",
+                options: [
+                    { value: "loose", label: "Loose and comfortable" },
+                    { value: "fitted", label: "Fitted and tailored" },
+                    { value: "mixed", label: "A mix, depending on the outfit" }
+                ]
+            },
+            {
+                id: 4,
+                text: "What's your preferred fabric?",
+                options: [
+                    { value: "natural", label: "Cotton and natural fabrics" },
+                    { value: "stretch", label: "Soft, stretchy, and breathable" },
+                    { value: "luxurious", label: "Luxurious and formal (silk, satin)" },
+                    { value: "cozy", label: "Warm and cozy (wool, fleece)" }
+                ]
+            },
+            {
+                id: 5,
+                text: "Do you follow current fashion trends?",
+                options: [
+                    { value: "trendy", label: "Yes, I love to keep up with trends" },
+                    { value: "moderate", label: "Somewhat – I like adding trendy pieces now and then" },
+                    { value: "timeless", label: "Not really – I prefer timeless pieces" }
+                ]
+            },
+            {
+                id: 6,
+                text: "Which colors or patterns do you prefer?",
+                options: [
+                    { value: "neutral", label: "Neutral tones (black, white, gray, beige)" },
+                    { value: "bold", label: "Bold colors and prints" },
+                    { value: "pastel", label: "Pastels and soft shades" },
+                    { value: "earthy", label: "Earthy tones (olive, brown, tan)" },
+                    { value: "any", label: "I'm open to any color/pattern" }
+                ]
+            },
+            {
+                id: 7,
+                text: "Are you looking to enhance or focus on any of these areas?",
+                options: [
+                    { value: "workwear", label: "Formal workwear" },
+                    { value: "daily", label: "Casual daily wear" },
+                    { value: "special", label: "Special occasion outfits" },
+                    { value: "athletic", label: "Athletic or athleisure wear" }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        const answers = {};
+
+        function renderQuestion() {
+            const question = questions[currentQuestion];
+            const quizContent = document.getElementById('quizContent');
+            quizContent.innerHTML = `
+                <h2 class="question">${question.text}</h2>
+                <div class="radio-group">
+                    ${question.options.map(option => `
+                        <div class="radio-item">
+                            <input type="radio" id="${option.value}" name="question${question.id}" value="${option.value}">
+                            <label for="${option.value}">${option.label}</label>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="button-group">
+                    <button class="button button-outline" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>Back</button>
+                    <button class="button button-primary" onclick="nextQuestion()">${currentQuestion === questions.length - 1 ? 'Get Results' : 'Continue'}</button>
+                </div>
+                <div class="question-indicator">
+                    Question ${currentQuestion + 1} of ${questions.length}
+                </div>
+            `;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function nextQuestion() {
+            const selectedOption = document.querySelector(`input[name="question${questions[currentQuestion].id}"]:checked`);
+            if (!selectedOption) {
+                alert('Please select an answer before continuing.');
+                return;
+            }
+            answers[questions[currentQuestion].id] = selectedOption.value;
+            if (currentQuestion === questions.length - 1) {
+                calculateResults();
+            } else {
+                currentQuestion++;
+                renderQuestion();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function calculateResults() {
+            const stylePoints = {
+                casual: 0,
+                formal: 0,
+                sporty: 0,
+                trendy: 0,
+                minimalist: 0,
+                vintage: 0,
+                classic: 0
+            };
+
+            Object.entries(answers).forEach(([questionId, answer]) => {
+                switch (answer) {
+                    case 'business':
+                        stylePoints.formal += 2;
+                        stylePoints.classic += 1;
+                        break;
+                    case 'casual':
+                        stylePoints.casual += 2;
+                        break;
+                    case 'sporty':
+                        stylePoints.sporty += 2;
+                        break;
+                    case 'trendy':
+                        stylePoints.trendy += 2;
+                        break;
+                    // Add more scoring logic here
+                }
+            });
+
+            const dominantStyle = Object.entries(stylePoints).reduce((a, b) => 
+                b[1] > a[1] ? b : a
+            )[0];
+
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('styleResult').textContent = dominantStyle[0].charAt(0).toUpperCase() + dominantStyle[0].slice(1);
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function retakeQuiz() {
+            currentQuestion = 0;
+            Object.keys(answers).forEach(key => delete answers[key]);
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            renderQuestion();
+        }
+
+        // Initialize the quiz
+        renderQuestion();
+    </script>
+</body>
+</html>
