@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STYLE FIX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-content">
+                <!-- Left Nav - Category Buttons -->
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="women">Women</button>
+                    <button class="category-btn" data-category="men">Men</button>
+                    <button class="category-btn" data-category="kids">Kids</button>
+                </div>
 
+                <!-- Center - Logo -->
+                <div class="logo">
+                    <h1>STYLE FIX</h1>
+                </div>
+
+                <!-- Right Nav - Login/Sign Up -->
+                <div class="auth-buttons">
+                    <!-- Login Button with redirection to login.html -->
+                    <button class="auth-btn" onclick="window.location.href='login.html'">
+                        <svg class="icon" role="img" aria-label="Login" viewBox="0 0 24 24">
+                            <path d="M15 12H9m0 0l4-4m-4 4l4 4" />
+                        </svg>  
+                        <span>Login</span>
+                    </button>
+                    
+                  
+                    
+                    <!-- X Icon for closing -->
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-image">
+            <img src="indbackground.jpg" alt="Fashion Background">
+            <div class="overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Personal styling for your
+                    <div class="accent-text">PERFECT LOOK</div>
+                </h2>
+                <p>Get hand-selected pieces that fit your style, size, and budget. Our expert stylists are here to help you look and feel your best.</p>
+                <div class="cta-section">
+                    <button class="cta-button">Take your style quiz</button>
+                    <p class="cta-subtext">Take our quiz to help us understand your style preferences</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="how-it-works">
+        <div class="section-container">
+            <h2>How It Works</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number"><span>1</span></div>
+                    <h3>Take the Quiz</h3>
+                    <p>Tell us about your style, fit preferences, and budget</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"><span>2</span></div>
+                    <h3>Meet Your Stylist</h3>
+                    <p>Get AI based recommendation</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"><span>3</span></div>
+                    <h3>Try at Home</h3>
+                    <p>virtual wearing</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="meet-us">
+                    <h3>Meet Us</h3>
+                    <p>Join our community and discover your perfect style with our expert stylists. Follow us on social media for the latest fashion trends and style tips.</p>
+                </div>
+                <div class="social-links">
+                  <a href="#" class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Instagram" viewBox="0 0 24 24" fill="none" width="24" height="24">
+                        <path d="M12 2.163c3.309 0 3.688.012 4.973.072 1.228.062 2.303.433 3.179 1.309.875.875 1.247 1.95 1.309 3.179.06 1.285.072 1.664.072 4.973 0 3.309 0 3.688-.012 4.973-.072 1.228-.062 2.303-.433 3.179-1.309.875-.875 1.247-1.95 1.309-3.179.06-1.285.072-1.664.072-4.973 0-3.309-.012-3.688-.072-4.973-.062-1.228-.433-2.303-1.309-3.179-.875-.875-1.95-1.247-3.179-1.309-1.285-.06-1.664-.072-4.973-.072-3.309 0-3.688.012-4.973.072-1.228.062-2.303.433-3.179 1.309-.875.875-1.247 1.95-1.309 3.179-.06 1.285-.072 1.664-.072 4.973 0 3.309.012 3.688.072 4.973.062 1.228.433 2.303 1.309 3.179.875.875 1.95 1.247 3.179 1.309 1.285.06 1.664.072 4.973.072zM12 5.836c-3.405 0-6.164 2.76-6.164 6.164 0 3.404 2.76 6.164 6.164 6.164 3.405 0 6.164-2.76 6.164-6.164 0-3.404-2.76-6.164-6.164-6.164zm0 10.276c-2.314 0-4.112-1.798-4.112-4.112 0-2.314 1.798-4.112 4.112-4.112 2.314 0 4.112 1.798 4.112 4.112 0 2.314-1.798 4.112-4.112 4.112zm5.643-7.976c-.711 0-1.287-.576-1.287-1.287 0-.711.576-1.287 1.287-1.287s1.287.576 1.287 1.287c0 .711-.576 1.287-1.287 1.287z" fill="#E4405F"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon">
+                  <svg viewBox="0 0 24 24" role="img" aria-label="Facebook" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22.672 0h-21.344c-.731 0-1.328.597-1.328 1.328v21.344c0 .731.597 1.328 1.328 1.328h11.497v-9.257h-3.14v-3.627h3.14v-2.673c0-4.034 2.355-6.28 5.91-6.28 1.717 0 3.239.128 3.673.186v3.67h-2.348c-1.84 0-2.346.875-2.346 2.267v2.366h4.693l-.616 3.627h-4.077v9.257h8.13c.73 0 1.328-.597 1.328-1.328v-21.344c0-.731-.597-1.328-1.328-1.328z" fill="#3B5998"/>
+                  </svg>
+                </a>
+                <button class="close-btn" onclick="closeMenu()">
+                    <svg class="icon" role="img" aria-label="Close" viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        // Close button functionality (for closing the menu or modal)
+        function closeMenu() {
+            // Example: Remove a class that hides the menu, or close a modal
+            console.log("Close button clicked");
+        }
+    </script>
+    <script src="javascript.js"></script>
+</body>
+</html>
